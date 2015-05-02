@@ -4,10 +4,10 @@
 var express = require('express');
 var app = express();
 
+
 var sassMiddleware = require('node-sass-middleware');    
 var coffeeMiddleware = require('coffee-middleware');
 
-var pl = require("./public/js/pl.js");
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -38,9 +38,10 @@ app.set('view engine', 'jade')
 //SASS
 app.use(
     sassMiddleware({
-        src: __dirname, // where the sass files are 
-        dest: __dirname, // where css should go
-	debug: true // obvious
+        src: __dirname + '/public/stylesheets', 
+        dest: __dirname + '/public/stylesheets',
+        prefix:  '/stylesheets',
+        debug: true // obvious
     })
 );
 
@@ -52,10 +53,6 @@ app.use(
         debug: true
   })
 );
-
-
-
-
 
 app.get('/', function (req, res) {
   res.render('index', { title : 'Home' }

@@ -2,7 +2,7 @@
 
 ##  Analizador  DPR
 
-> Autor: Alexis López, Marcos Luis, Sergio Gonzáles Rodriguez
+> Autor: Alexis López, Marcos Luis, Sergio González Rodríguez
 
 ## Acceder a la pagina de la Practica 4
 
@@ -10,7 +10,7 @@
 
 [Heroku](https://analizadordpr.herokuapp.com/), 
 
-[Test Heroku](https://analizadordpr.herokuapp.com/tests), 
+[Test Heroku](https://analizadordpr.herokuapp.com/test), 
 
 
 Para ver los tests hay un enlace en la misma.
@@ -28,5 +28,6 @@ Para probar karma:
   
   
 ## Travis
-[![Build Status](https://api.travis-ci.org/alu0100204148/AnalizadorLexico.svg)](https://travis-ci.org/alu0100204148/AnalizadorLexico)
+[![Build Status](https://api.travis-ci.org/alu0100204148/AnalizadorDPR.svg)](https://travis-ci.org/alu0100204148/AnalizadorDPR)
+
 

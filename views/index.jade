@@ -8,12 +8,14 @@ head
     link(href='http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css', media='screen, projection', rel='stylesheet')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js')
-    //script(src='./views/main.js')
-    script(src='./js/pl.js')
+    script(src='./js/pl0.js')
     script(src='./js/main.js')
   body
     header
-      h1 Predictive Recursive Descent Parser
+      img(style='float: left', src='/images/logo.png', width='30', height='30')
+      h1 Práctica: 
+        span(style='color: #2dc234') Analizador
+      h2 Analizador Descendente Predictivo Recursivo
       nav
         ul
           li
@@ -34,11 +36,12 @@ head
             a(href='http://crguezl.github.io/pl-html/', title='PLGH') PL-GH
           li
             a(href='http://docs.mathjax.org/en/latest/start.html', title='MathJax') MathJax
+          li
+            a(href='http://travis-ci.org/alu0100204148/AnalizadorDPR', title='Travis') Travis
 
     section
-      p This website contains a simple example of a predictive parser
       #header.header
-        p Load example to parse
+        p Cargar el ejemplo a parsear
         div
           textarea#original(autofocus='', cols='80', rows='5')
         br
@@ -51,14 +54,10 @@ head
             input#files(type='file')
           script(type='text/javascript').
             function dump(fileName) {
-            $.ajax({
-            url: fileName,
-            cache: false,
-            success: function (data) {
+            $.get(fileName, function (data) {
             $("#original").val(data);
-            }
             });
-            }
+            };
             document.getElementById('files').addEventListener('change', CopyMe, false);
             function CopyMe(evt) {
             var file = evt.target.files[0];
@@ -71,9 +70,10 @@ head
             }
             else { alert("Failed to load file"); }
             }
-      input#PARSE.mylink(type='button', value='parse')
+      input#PARSE.mylink.Boton(type='button', value='parse')
       pre#OUTPUT.
         
     //
       footer
         a href="/" back to main
+
