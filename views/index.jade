@@ -1,19 +1,19 @@
-doctype html(lang='en')
-head
+doctype html
+html
+  head
     title Predictive Recursive Descent Parser
     meta(charset='utf-8')
-    |         
     link(href='/stylesheets/style.css', media='screen, projection', rel='stylesheet')
-    |       
     link(href='http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css', media='screen, projection', rel='stylesheet')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js')
-    script(src='./js/pl0.js')
+    // script(src='./js/pl0.js')
     script(src='./js/main.js')
   body
     header
       img(style='float: left', src='/images/logo.png', width='30', height='30')
-      h1 Práctica: 
+      h1
+        | Práctica: 
         span(style='color: #2dc234') Analizador
       h2 Analizador Descendente Predictivo Recursivo
       nav
@@ -38,7 +38,6 @@ head
             a(href='http://docs.mathjax.org/en/latest/start.html', title='MathJax') MathJax
           li
             a(href='http://travis-ci.org/alu0100204148/AnalizadorDPR', title='Travis') Travis
-
     section
       #header.header
         p Cargar el ejemplo a parsear
@@ -70,9 +69,10 @@ head
             }
             else { alert("Failed to load file"); }
             }
+          script(src='js/pl0.js')
+          script(src='js/main.js')
       input#PARSE.mylink.Boton(type='button', value='parse')
       pre#OUTPUT.
-        
     //
       footer
         a href="/" back to main

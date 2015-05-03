@@ -4,7 +4,6 @@
 var express = require('express');
 var app = express();
 
-
 var sassMiddleware = require('node-sass-middleware');    
 var coffeeMiddleware = require('coffee-middleware');
 
@@ -64,6 +63,9 @@ app.get('/test', function (request, response) {
    response.render('test', { title: 'test' });
 });
 
+app.get('/grammar', function (request, response) {
+   response.render('grammar', { title: 'grammar' });
+});
 
 
 app.listen(app.get('port'), function () {
