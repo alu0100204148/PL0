@@ -6,9 +6,9 @@
 
 ## Acceder a la pagina de la Practica
 
-[Heroku](https://lp0.herokuapp.com/), 
+[Heroku](https://pl0.herokuapp.com/), 
 
-[Test Heroku](https://lp0.herokuapp.com/test), 
+[Test Heroku](https://pl0.herokuapp.com/test), 
 
 
 
@@ -17,6 +17,6 @@
 
   
 ## Travis
-[![Build Status](https://api.travis-ci.org/alu0100204148/lp0.svg)](https://travis-ci.org/alu0100204148/lp0)
+[![Build Status](https://api.travis-ci.org/alu0100204148/pl0.svg)](https://travis-ci.org/alu0100204148/lp0)
 
 
