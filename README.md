@@ -4,7 +4,7 @@
 
 > Autor: Alexis López, Marcos Luis, Sergio González Rodríguez
 
-## Acceder a la pagina de la Practica
+## Acceder a la pagina de la Práctica
 
 [Heroku](https://pl0.herokuapp.com/), 
 
@@ -17,6 +17,6 @@
 
   
 ## Travis
-[![Build Status](https://api.travis-ci.org/alu0100204148/pl0.svg)](https://travis-ci.org/alu0100204148/lp0)
+[![Build Status](https://api.travis-ci.org/alu0100204148/pl0.svg)](https://travis-ci.org/alu0100204148/pl0)
 
 
