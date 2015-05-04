@@ -34,7 +34,7 @@ app.set('view engine', 'jade')
 //app.use(express.logger('dev'))
 
 
-SASS
+//SASS
 app.use(
     sassMiddleware({
         src: __dirname + '/public/stylesheets', 
