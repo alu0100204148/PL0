@@ -4,7 +4,7 @@
 var express = require('express');
 var app = express();
 
-//var sassMiddleware = require('node-sass-middleware');    
+var sassMiddleware = require('node-sass-middleware');    
 var coffeeMiddleware = require('coffee-middleware');
 
 
@@ -34,15 +34,15 @@ app.set('view engine', 'jade')
 //app.use(express.logger('dev'))
 
 
-//SASS
-// app.use(
-//     sassMiddleware({
-//         src: __dirname + '/public/stylesheets', 
-//         dest: __dirname + '/public/stylesheets',
-//         prefix:  '/stylesheets',
-//         debug: true // obvious
-//     })
-// );
+SASS
+app.use(
+    sassMiddleware({
+        src: __dirname + '/public/stylesheets', 
+        dest: __dirname + '/public/stylesheets',
+        prefix:  '/stylesheets',
+        debug: true // obvious
+    })
+);
 
 //Coffee
 app.use(
