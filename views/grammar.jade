@@ -1,4 +1,4 @@
-doctype html(lang='en')
+doctype html
 head
     title Predictive Recursive Descent Parser
     meta(charset='utf-8')
@@ -11,17 +11,8 @@ head
     script(src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js')
     script(src='/javascripts/main.js')
     script(type='text/x-mathjax-config').
-      MathJax.Hub.Config({
-        extensions: ["tex2jax.js"],
-        jax: ["input/TeX", "output/HTML-CSS"],
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-          processEscapes: true
-        },
-        "HTML-CSS": { availableFonts: ["TeX"] }
-      });
-    script(type='text/javascript', src='http://cdn.mathjax.org/mathjax/latest/MathJax.js')
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\\(','\\)']]}});
+    script(type='text/javascript', src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML')
   body
     header
       h1 Predictive Recursive Descent Parser
@@ -52,11 +43,10 @@ head
           li
             a(href='http://travis-ci.org/alu0100204148/lp0', title='Travis') Travis
     section
-       br
+      br
     | Recuerde que un PEG $G$ es una cuaterna $G =(\Sigma,V,P,S)$.
     ol
-      li
-        | $\Sigma$ es el conjunto de terminales.
+      li $\Sigma$ es el conjunto de terminales.
       li
         | $V$ es un conjunto (disjunto de $\Sigma$) que se denomina conjunto de 
         i s&iacute;mbolos no terminales
@@ -78,93 +68,91 @@ head
         i expresi&oacute;n de arranque
         | .
     ol
-      li
-        | $\Sigma = \{ =, +, -, *, /, (, ), 0 \ldots 9 \}$,
+      li $\Sigma = \{ =, +, -, *, /, (, ), 0 \ldots 9 \}$,
       li
         | $V = \{ program, block, constants, identificators, arguments, process, st, cond, exp, term, factor \} \cup$ 
         br
-        |   $\{ASSIGN, ADD, MUL, LEFTPAR, RIGHTPAR, SEMICOLON, DOT, COMMA, COMPARISON \} \cup$ 
+        |   $\{ASSIGN, ADD, MUL, LEFTPAR, RIGHTPAR, COLON, SEMICOLON, DOT, COMMA, COMPARISON \} \cup$ 
         br
         |   $\{ID, NUMBER, IF, THEN, ELSE, PROCEDURE, BEGIN, END, WHILE, DO, CALL, P, ODD, CONST, VAR, \_ \}$
       li
         | Reglas de an&aacute;lisis:
         ol
           pre.
-                  program        = (block)+ DOT 
+            \nprogram        = (block)+ DOT 
             
-                  block          = CONST (constants)+ SEMICOLON 
-                                 / VAR (identificators)+ SEMICOLON 
-                                 / (process)* st 
+            block          = CONST (constants)+ SEMICOLON 
+                           / VAR (identificators)+ SEMICOLON 
+                           / (process)* st 
             
-                  constants      = COMMA ID ASSIGN NUMBER 
-                                 / ID ASSIGN NUMBER 
-                           
-                  identificators = COMMA ID 
-                                 / ID 
+            constants      = COMMA ID ASSIGN NUMBER 
+                           / ID ASSIGN NUMBER 
+                     
+            identificators = COMMA ID 
+                           / ID 
             
-                  arguments      = COMMA ID 
-                                 / ID 
-                           
-                  process        = PROCEDURE ID LEFTPAR (arguments)+ RIGHTPAR SEMICOLON block SEMICOLON
-                                 / PROCEDURE ID SEMICOLON block SEMICOLON  
-                        
-                  st             = ID ASSIGN exp SEMICOLON      
-                                 / ID ASSIGN exp    
-                                 / IF cond THEN st ELSE st  
-                                 / IF THEN st  
-                                 / CALL ID LEFTPAR (identificators)+ RIGHTPAR
-                                 / CALL ID
-                                 / P exp  
-                                 / WHILE cond DO st  
-                                 / BEGIN st END 
+            arguments      = COMMA ID 
+                           / ID 
+                     
+            process        = PROCEDURE ID LEFTPAR (arguments)+ RIGHTPAR SEMICOLON block SEMICOLON
+                           / PROCEDURE ID SEMICOLON block SEMICOLON  
+                  
+            st             = ID ASSIGN exp SEMICOLON      
+                           / ID ASSIGN exp    
+                           / IF cond THEN st ELSE st  
+                           / IF THEN st  
+                           / CALL ID LEFTPAR (identificators)+ RIGHTPAR
+                           / CALL ID
+                           / P exp  
+                           / WHILE cond DO st  
+                           / BEGIN st END 
             
-                  cond           = ODD exp  
-                                 / exp COMPARISON exp  
+            cond           = ODD exp  
+                           / exp COMPARISON exp  
             
-                  exp            = term (ADD term)*   
+            exp            = term (ADD term)*   
             
-                  term           = factor (MUL factor)* 
+            term           = factor (MUL factor)* 
             
-                  factor         = NUMBER
-                                 / ID
-                                 / LEFTPAR exp RIGHTPAR   
+            factor         = NUMBER
+                           / ID
+                           / LEFTPAR exp RIGHTPAR   
             
             
             
-                  _ = $[ \t\n\r]*
+            _ = $[ \t\n\r]*
             
-                  ASSIGN     = _ op:'=' _
-                             / _ op:':=' _ 
-                  ADD        = _ op:[+-] _ 
-                  MUL        = _ op:[*/] _ 
-                  COMPARISON = _ op:[<>=!][=] _ 
-                             / _ op:[<>] _ 
-                  ID         = _ id:$([a-zA-Z_][a-zA-Z_0-9]*) _         
-                  NUMBER     = _ digits:$[0-9]+ _ 
-                      
-              
-                  DOT        = _ "." _
-                  SEMICOLON  = _ ";" _
-                  COMMA      = _ "," _
-                  LEFTPAR    = _"("_
-                  RIGHTPAR   = _")"_
-                  IF         = _ "if" _   
-                  THEN       = _ "then" _
-                  ELSE       = _ "else" _
-                  CALL       = _ "call" _
-                  P          = _ "p" _
-                  ODD        = _ "odd" _
-                  WHILE      = _ "while" _
-                  DO         = _ "do" _
-                  BEGIN      = _ "begin" _
-                  END        = _ "end" _
-                  CONST      = _ "const" _
-                  VAR        = _ "var" _
-                  PROCEDURE  = _ "procedure" _
+            ASSIGN     = _ op:'=' _
+                       / _ op:':=' _ 
+            ADD        = _ op:[+-] _ 
+            MUL        = _ op:[*/] _ 
+            COMPARISON = _ op:[<>=!][=] _ 
+                       / _ op:[<>] _ 
+            ID         = _ id:$([a-zA-Z_][a-zA-Z_0-9]*) _         
+            NUMBER     = _ digits:$[0-9]+ _ 
+                
             
-                        
-      li
-        | Expresi&oacute;n de arranque: $program$
+            DOT        = _ "." _
+            SEMICOLON  = _ ";" _
+            COMMA      = _ "," _
+            LEFTPAR    = _"("_
+            RIGHTPAR   = _")"_
+            IF         = _ "if" _   
+            THEN       = _ "then" _
+            ELSE       = _ "else" _
+            CALL       = _ "call" _
+            P          = _ "p" _
+            ODD        = _ "odd" _
+            WHILE      = _ "while" _
+            DO         = _ "do" _
+            BEGIN      = _ "begin" _
+            END        = _ "end" _
+            CONST      = _ "const" _
+            VAR        = _ "var" _
+            PROCEDURE  = _ "procedure" _
+            
+                              
+      li Expresi&oacute;n de arranque: $program$
     br
     br
     br
