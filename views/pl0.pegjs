@@ -27,8 +27,8 @@ constants = COMMA i:ID ASSIGN n:NUMBER { return {type: '=', ident:i, value:n }; 
 identificators = COMMA i:ID { return {ident:i}; }
                / i:ID  { return {ident:i}; }
 
-arguments = COMMA VAR i:ID { return {ident:i}; }
-          / VAR i:ID  { return {ident:i}; }
+arguments = COMMA i:ID { return {ident:i}; }
+          / i:ID  { return {ident:i}; }
 
 process = PROCEDURE i:ID LEFTPAR a:(arguments)+ RIGHTPAR COLON b:(block)+ END SEMICOLON { return {type: 'PROCEDURE', ident:i, arguments:a, block:b }; }
         / PROCEDURE i:ID COLON b:(block)+ END SEMICOLON { return {type: 'PROCEDURE', ident:i, block:b }; }
@@ -37,7 +37,7 @@ st     = i:ID ASSIGN e:exp SEMICOLON { return {type: 'ASSIGN', left: i, right: e
        / i:ID ASSIGN e:exp { return {type: 'ASSIGN', left: i, right: e}; }   
        / IF c:cond THEN st:st ELSE sf:st  { return {type: 'IFELSE', condition:c, true_st:st, false_st:sf }; }
        / IF c:cond THEN s:st  { return {type: 'IF', condition:c, statement:s }; }
-       / CALL i:ID LEFTPAR a:(identificators)+ RIGHTPAR SEMICOLON { return {type: 'CALL', value:i, arguments:a }; }
+       / CALL i:ID LEFTPAR arg:(identificators)+ RIGHTPAR SEMICOLON { return {type: 'CALL', value:i, arguments:arg }; }
        / CALL i:ID SEMICOLON { return {type: 'CALL', value:i}; }
        / P e:exp  { return {type: 'P', value:e }; }
        / WHILE c:cond DO s:(st)+  { return {type: 'WHILE', condition:c, statement:s }; }
@@ -62,9 +62,14 @@ MUL        = _ op:[*/] _ { return op; }
 COMPARISON = _ op:$([<>=!][=]) _ { return op; }
            / _ op:[<>] _ { return op; }
 
+DOT  = _ "." _
+SEMICOLON  = _ ";" _
+COLON      = _ ":" _
+COMMA      = _ "," _
+
 LEFTPAR  = _"("_
 RIGHTPAR = _")"_
-IF   = _ "if" _    /* Si lo pones despues de id da error porque lo caza ID */
+IF   = _ "if" _
 THEN = _ "then" _
 ELSE = _ "else" _
 CALL = _ "call" _
@@ -86,7 +91,3 @@ NUMBER   = _ digits:$[0-9]+ _
             { 
               return { type: 'NUM', value: parseInt(digits, 10) }; 
             }
-DOT  = _ "." _
-SEMICOLON  = _ ";" _
-COLON      = _ ":" _
-COMMA      = _ "," _
