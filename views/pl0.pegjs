@@ -57,6 +57,7 @@ factor = NUMBER
 _ = $[ \t\n\r]*
 
 ASSIGN     = _ op:'=' _  { return op; }
+					 / _ op:':=' _ { return op; }
 ADD        = _ op:[+-] _ { return op; }
 MUL        = _ op:[*/] _ { return op; }
 COMPARISON = _ op:$([<>=!][=]) _ { return op; }
@@ -64,7 +65,6 @@ COMPARISON = _ op:$([<>=!][=]) _ { return op; }
 
 DOT  = _ "." _
 SEMICOLON  = _ ";" _
-COLON      = _ ":" _
 COMMA      = _ "," _
 
 LEFTPAR  = _"("_
