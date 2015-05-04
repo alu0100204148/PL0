@@ -30,18 +30,18 @@ identificators = COMMA i:ID { return {ident:i}; }
 arguments = COMMA i:ID { return {ident:i}; }
           / i:ID  { return {ident:i}; }
 
-process = PROCEDURE i:ID LEFTPAR a:(arguments)+ RIGHTPAR COLON b:(block)+ END SEMICOLON { return {type: 'PROCEDURE', ident:i, arguments:a, block:b }; }
-        / PROCEDURE i:ID COLON b:(block)+ END SEMICOLON { return {type: 'PROCEDURE', ident:i, block:b }; }
+process = PROCEDURE i:ID LEFTPAR a:(arguments)+ RIGHTPAR SEMICOLON b:block SEMICOLON { return {type: 'PROCEDURE', ident:i, arguments:a, block:b }; }
+        / PROCEDURE i:ID SEMICOLON b:block SEMICOLON { return {type: 'PROCEDURE', ident:i, block:b }; }
 
-st     = i:ID ASSIGN e:exp SEMICOLON { return {type: 'ASSIGN', left: i, right: e}; }  /* Sentencia de asignación */     
-       / i:ID ASSIGN e:exp { return {type: 'ASSIGN', left: i, right: e}; }   
+st     = i:ID ASSIGN e:exp SEMICOLON { return {type: 'ASSIGN', left: i, right: e}; }  
+			 / i:ID ASSIGN e:exp { return {type: 'ASSIGN', left: i, right: e}; }  
        / IF c:cond THEN st:st ELSE sf:st  { return {type: 'IFELSE', condition:c, true_st:st, false_st:sf }; }
        / IF c:cond THEN s:st  { return {type: 'IF', condition:c, statement:s }; }
-       / CALL i:ID LEFTPAR arg:(identificators)+ RIGHTPAR SEMICOLON { return {type: 'CALL', value:i, arguments:arg }; }
-       / CALL i:ID SEMICOLON { return {type: 'CALL', value:i}; }
+       / CALL i:ID LEFTPAR arg:(identificators)+ RIGHTPAR { return {type: 'CALL', value:i, arguments:arg }; }
+       / CALL i:ID { return {type: 'CALL', value:i}; }
        / P e:exp  { return {type: 'P', value:e }; }
-       / WHILE c:cond DO s:(st)+  { return {type: 'WHILE', condition:c, statement:s }; }
-       / BEGIN s:(st)+ END SEMICOLON { return {type: 'BEGIN', statement:s }; }
+       / WHILE c:cond DO s:st  { return {type: 'WHILE', condition:c, statement:s }; }
+       / BEGIN s:st END { return {type: 'BEGIN', statement:s }; }
 
 cond   = ODD e:exp  { return {type: 'ODD', value:e }; }
        / e1:exp op:COMPARISON e2:exp  { return {type: op, left:e1, right:e2 }; }
