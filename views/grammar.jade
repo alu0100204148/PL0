@@ -1,30 +1,39 @@
 doctype html
 head
-    title Predictive Recursive Descent Parser
-    | &#x9;
     meta(charset='utf-8')
-    |         
-    | &#x9;
+
+    title Predictive Recursive Descent Parser
+     
     link(href='/stylesheets/style.css', media='screen, projection', rel='stylesheet')
-    | &#x9;
+   
     link(href='images/favicon.jpg', rel='icon', type='image/jpg')
-    |   &#x9;
+    
     link(href='http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css', media='screen, projection', rel='stylesheet')
-    |   &#x9;
+    
+    title Predictive Recursive Descent Parser
+    
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
-    |   &#x9;
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js')
-    |   &#x9;
-    script(src='/javascripts/main.js')
-  body
     script(type='text/x-mathjax-config').
-      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\\(','\\)']]}});
-    |   &#x9;
-    script(type='text/javascript', src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML')
-    |   
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] }
+      });
+    script(type='text/javascript', src='http://cdn.mathjax.org/mathjax/latest/MathJax.js')
+    
+    
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js')
+    script(src='/javascripts/main.js')
+    
+  body
     header
       h1 Predictive Recursive Descent Parser
-      |     
       nav
         ul
           li
