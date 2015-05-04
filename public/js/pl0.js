@@ -875,7 +875,16 @@ pl0 = (function() {
                       s0 = peg$currPos;
                       s1 = peg$parseBEGIN();
                       if (s1 !== peg$FAILED) {
-                        s2 = peg$parsest();
+                        s2 = [];
+                        s3 = peg$parsest();
+                        if (s3 !== peg$FAILED) {
+                          while (s3 !== peg$FAILED) {
+                            s2.push(s3);
+                            s3 = peg$parsest();
+                          }
+                        } else {
+                          s2 = peg$c0;
+                        }
                         if (s2 !== peg$FAILED) {
                           s3 = peg$parseEND();
                           if (s3 !== peg$FAILED) {

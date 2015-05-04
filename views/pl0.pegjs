@@ -41,7 +41,7 @@ st     = i:ID ASSIGN e:exp SEMICOLON { return {type: 'ASSIGN', left: i, right: e
        / CALL i:ID { return {type: 'CALL', value:i}; }
        / P e:exp  { return {type: 'P', value:e }; }
        / WHILE c:cond DO s:st  { return {type: 'WHILE', condition:c, statement:s }; }
-       / BEGIN s:st END { return {type: 'BEGIN', statement:s }; }
+       / BEGIN s:(st)+ END { return {type: 'BEGIN', statement:s }; }
 
 cond   = ODD e:exp  { return {type: 'ODD', value:e }; }
        / e1:exp op:COMPARISON e2:exp  { return {type: op, left:e1, right:e2 }; }
