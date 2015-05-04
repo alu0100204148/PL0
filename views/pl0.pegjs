@@ -1,4 +1,4 @@
-{
+ {
   var tree = function(f, r) {
     if (r.length > 0) {
       var last = r.pop();
